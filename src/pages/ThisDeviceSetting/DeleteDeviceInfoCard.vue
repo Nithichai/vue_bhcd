@@ -1,14 +1,14 @@
 <template>
   <div>
     <card v-show="Object.keys(model).length!=0">
-      <h5>ยกเลิกบริการ</h5>
+      <h5>ลบการเชื่อมต่อ</h5>
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" @click="confirmModalVisible = true">
-        ยกเลิกบริการ
+        ลบการเชื่อมต่อ
       </button>
     </card>
     <modal :show.sync="confirmModalVisible" class="modal-search" id="confirmModal" :centered="false" :show-close="true">
       <div slot="header">
-        <p class="text-muted">ต้องการยกเลิกบริการ ?</p>
+        <p class="text-muted">ต้องการลบการเชื่อมต่ออุปกรณ์ ?</p>
       </div>
       <div slot="footer">
         <div class="row">
@@ -18,16 +18,16 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <base-button type="danger" @click="deleteDevice" :loading=deletingUserInfo&&deletingUserLine>ลบ</base-button>
+            <base-button type="danger" @click="deleteDevice" :loading=deleting>ลบ</base-button>
+            <!-- <base-button @click="deleteDevice">ยกเลิก</base-button> -->
           </div>
         </div>
         <div class="row">
             <div class="col-md-12 pl-md-3 pr-md-1 pt-3">
-              <p v-if="deleteUserInfoStatus==400 || deleteUserLineStatus==400" class="text-danger">การยืนยันไม่สำเร็จ</p>
+              <p v-if="deleteStatus==400" class="text-danger">การยืนยันไม่สำเร็จ</p>
             </div>
           </div>
       </div>
-      <div>{{ deleteComplete }}</div>
     </modal>
   </div>
 </template>
@@ -54,64 +54,34 @@
     data() {
       return {
         confirmModalVisible: false,
-        deletingUserInfo: false,
-        deletingUserLine: false,
-        deleteUserInfoStatus: -1,
-        deleteUserLineStatus: -1
-      }
-    },
-    computed: {
-      deleteComplete() {
-        if (this.deleteUserInfoStatus == 200 && this.deleteUserLineStatus == 200) {
-          this.confirmModalVisible = false
-          this.notifyVue('top', 'right')
-          setTimeout(function() {
-            location.reload()
-          }, 3000);
-        }
+        deleting: false,
+        deleteStatus: -1
       }
     },
     methods: {
       deleteDevice:function() {
-        this.deletingUserInfo = true
-        this.deletingUserLine = true
-
+        this.deleting = true
         axios({
           method: 'post',
-          url: 'http://127.0.0.1:8000/user-info/delete/id',
+          url: 'http://127.0.0.1:8000/device-info/delete/id',
           headers: {
             'Content-Type' : 'application/json'
           },
           data: {
             "data" : {
-              "id" : "Ud20b48e6c0ff39f924fef4d5ffd9ce4a",
+              "deviceid" : this.$route.params.id,
             }
           }
         }).then((response) => {
-          this.deleteUserInfoStatus = response.status
-          this.deletingUserInfo = false
-        }).catch((error) => {
-          this.deleteUserInfoStatus = error.response.status
-          this.deletingUserInfo = false
-        })
-
-        axios({
-          method: 'post',
-          url: 'http://127.0.0.1:8000/user-line/delete/id',
-          headers: {
-            'Content-Type' : 'application/json'
-          },
-          data: {
-            "data" : {
-              "id" : "Ud20b48e6c0ff39f924fef4d5ffd9ce4a",
-            }
+          this.deleteStatus = response.status
+          this.deleting = false
+          if (this.deleteStatus == 200) {
+            this.confirmModalVisible = false
+            this.notifyVue('top', 'right')
+            setTimeout(function() {
+              window.location.replace("http://localhost:8080/#/device-setting/")
+            }, 3000);
           }
-        }).then((response) => {
-          this.deleteUserLineStatus = response.status
-          this.deletingUserLine = false
-        }).catch((error) => {
-          this.deleteUserLineStatus = error.response.status
-          this.deletingUserLine = false
         })
       },
       notifyVue(verticalAlign, horizontalAlign) {

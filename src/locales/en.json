@@ -120,6 +120,7 @@
     "tableList": "Table List",
     "typography": "Typography",
     "rtlSupport": "RTL Support",
-    "personal-info": "ข้อมูลผู้ใช้งาน"
+    "personal-info": "ข้อมูลผู้ใช้งาน",
+    "device-setting": "จัดการข้อมูลผู้ใช้งาน"
   }
 }

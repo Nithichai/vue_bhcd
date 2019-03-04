@@ -4,7 +4,7 @@
         <edit-personal-info-form :model="model"></edit-personal-info-form> 
     </div>
     <div class="col-md-4">
-        <logout-card :model="user"></logout-card> 
+        <logout-card :model="model"></logout-card>
     </div>
   </div>
 </template>
@@ -31,13 +31,13 @@
             "id" : "Ud20b48e6c0ff39f924fef4d5ffd9ce4a"
           }
         }
-      // }).then(response => (this.model = response.data.data))
-      }).then(response => (this.model = response.data.data))
+      }).then((response) => {
+        this.model = response.data.data
+      })
     },
     data() {
       return {
-        model: {},
-        user: {}
+        model: {}
       }
     },
   }

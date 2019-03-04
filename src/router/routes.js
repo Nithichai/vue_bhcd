@@ -3,13 +3,14 @@ import NotFound from "@/pages/NotFoundPage.vue";
 
 const PersonalInfo = () => import("@/pages/PersonalInfo.vue");
 const DeviceSetting = () => import("@/pages/DeviceSetting.vue");
+const ThisDeviceSetting = () => import("@/pages/ThisDeviceSetting.vue");
 const HealthInfo = () => import("@/pages/HealthInfo.vue");
 
 const routes = [
   {
     path: "/",
     component: DashboardLayout,
-    // redirect: "/personal-info",
+    // redirect: "/",
     children: [
       {
         path: "personal-info",
@@ -23,8 +24,13 @@ const routes = [
       },
       {
         path: "device-setting",
-        name: "device-setting",
+        name: "จัดการข้อมูลผู้ใช้งาน",
         component: DeviceSetting
+      },
+      {
+        path: "this-device-setting/:id",
+        name: "แก้ไขข้อมูลผู้สูงอายุ",
+        component: ThisDeviceSetting
       }
     ]
   },
