@@ -61,7 +61,7 @@
           </div>
           <div class="row">
               <div class="col-md-12 pl-md-3 pr-md-1 pt-3">
-                <!-- <p v-if="insertStatus==400" class="text-danger">การยืนยันไม่สำเร็จ</p> -->
+                <p v-if="insertStatus==400" class="text-danger">การยืนยันไม่สำเร็จ</p>
                 <p v-if="insertStatus==401" class="text-danger">รหัสผ่านไม่ถูกต้อง</p>
                 <p v-if="insertStatus==404" class="text-danger">ไม่มีอุปกรณ์ในระบบ</p>
                 <p v-if="insertStatus==200" class="text-danger">มีอุปกรณ์ในระบบแล้ว</p>
@@ -114,7 +114,6 @@
     methods: {
       registerDevice() {
         this.inserting = true
-        console.log(this.deviceid, this.password)
         axios({
           method: 'post',
           url: 'http://127.0.0.1:8000/device-info/new/onlyid',

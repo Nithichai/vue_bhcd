@@ -5,7 +5,7 @@
       <div class="col-md-12 pl-md-3">
         <base-input label="หมายเลข"
                   placeholder="หมายเลข"
-                  v-model="model.device_id"
+                  v-model="model.deviceid"
                   disabled>
         </base-input>
       </div>

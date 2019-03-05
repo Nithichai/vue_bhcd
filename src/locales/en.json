@@ -6,8 +6,9 @@
     "simpleTable": "Simple Table",
     "totalShipments": "สรุปผลข้อมูลทางด้านสุขภาพ",
     "chartCategories": [
-      "Heart Rate",
-      "Blood Pressure"
+      "High Blood Pressure",
+      "Low Blood Pressure",
+      "Heart Rate"
     ],
     "tasks": "Tasks({count})",
     "today": "Today",
