@@ -18,16 +18,15 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <base-button type="danger" @click="deleteDevice" :loading=deletingUserInfo&&deletingUserLine>ลบ</base-button>
+            <base-button type="danger" @click="deleteDevice" :loading=deleting>ลบ</base-button>
           </div>
         </div>
         <div class="row">
             <div class="col-md-12 pl-md-3 pr-md-1 pt-3">
-              <p v-if="deleteUserInfoStatus==400 || deleteUserLineStatus==400" class="text-danger">การยืนยันไม่สำเร็จ</p>
+              <p v-if="deleteStatus==400" class="text-danger">การยืนยันไม่สำเร็จ</p>
             </div>
           </div>
       </div>
-      <div>{{ deleteComplete }}</div>
     </modal>
   </div>
 </template>
@@ -54,47 +53,13 @@
     data() {
       return {
         confirmModalVisible: false,
-        deletingUserInfo: false,
-        deletingUserLine: false,
-        deleteUserInfoStatus: -1,
-        deleteUserLineStatus: -1
-      }
-    },
-    computed: {
-      deleteComplete() {
-        if (this.deleteUserInfoStatus == 200 && this.deleteUserLineStatus == 200) {
-          this.confirmModalVisible = false
-          this.notifyVue('top', 'right')
-          setTimeout(function() {
-            location.reload()
-          }, 3000);
-        }
+        deleting: false,
+        deleteStatus: -1,
       }
     },
     methods: {
       deleteDevice:function() {
-        this.deletingUserInfo = true
-        this.deletingUserLine = true
-
-        axios({
-          method: 'post',
-          url: 'http://127.0.0.1:8000/user-info/delete/id',
-          headers: {
-            'Content-Type' : 'application/json'
-          },
-          data: {
-            "data" : {
-              "id" : "Ud20b48e6c0ff39f924fef4d5ffd9ce4a",
-            }
-          }
-        }).then((response) => {
-          this.deleteUserInfoStatus = response.status
-          this.deletingUserInfo = false
-        }).catch((error) => {
-          this.deleteUserInfoStatus = error.response.status
-          this.deletingUserInfo = false
-        })
-
+        this.deleting = true
         axios({
           method: 'post',
           url: 'http://127.0.0.1:8000/user-line/delete/id',
@@ -107,11 +72,28 @@
             }
           }
         }).then((response) => {
-          this.deleteUserLineStatus = response.status
-          this.deletingUserLine = false
+          axios({
+            method: 'post',
+            url: 'http://127.0.0.1:8000/user-info/delete/id',
+            headers: {
+              'Content-Type' : 'application/json'
+            },
+            data: {
+              "data" : {
+                "id" : "Ud20b48e6c0ff39f924fef4d5ffd9ce4a",
+              }
+            }
+          }).then((response) => {
+            this.deleteStatus = response.status
+            this.deleting = false
+          }).catch((error) => {
+            this.deleteStatus = error.response.status
+            this.deleting = false
+          })
         }).catch((error) => {
-          this.deleteUserLineStatus = error.response.status
-          this.deletingUserLine = false
+          this.deleteStatus = error.response.status
+          this.deleting = false
+          return
         })
       },
       notifyVue(verticalAlign, horizontalAlign) {

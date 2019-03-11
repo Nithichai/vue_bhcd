@@ -102,10 +102,15 @@
       const axios = require('axios');
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:8000/device-info/list/deviceid-name',
+        url: 'http://127.0.0.1:8000/user-line-device-info/list/id',
         headers: {
           'Content-Type' : 'application/json'
-        }
+        },
+        data: {
+            "data" : {
+              "id" : "Ud20b48e6c0ff39f924fef4d5ffd9ce4a"
+            }
+          }
       }).then((response) => {
         this.loading = false
         this.data = response.data.data
@@ -127,15 +132,32 @@
             }
           }
         }).then((response) => {
-          this.insertStatus = response.status
-          this.inserting = false
-          if (this.insertStatus == 201) {
-            this.addDeviceModalVisible = false
-            this.notifyVue('top', 'right')
-            setTimeout(function() {
-              location.reload()
-            }, 3000);
-          }
+          axios({
+            method: 'post',
+            url: 'http://127.0.0.1:8000/user-line/new',
+            headers: {
+              'Content-Type' : 'application/json'
+            },
+            data: {
+              "data" : {
+                "id" : "Ud20b48e6c0ff39f924fef4d5ffd9ce4a",
+                "esp" : this.deviceid
+              }
+            }
+          }).then((response) => {
+            this.insertStatus = response.status
+            this.inserting = false
+            if (this.insertStatus == 201) {
+              this.addDeviceModalVisible = false
+              this.notifyVue('top', 'right')
+              setTimeout(function() {
+                location.reload()
+              }, 3000);
+            }
+          }).catch((error) => {
+            this.insertStatus = error.response.status
+            this.inserting = false
+          })
         }).catch((error) => {
           this.insertStatus = error.response.status
           this.inserting = false

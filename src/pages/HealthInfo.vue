@@ -57,33 +57,7 @@
     data() {
       return {
         bigLineChart: {
-          allData:[
-            {}
-            // { // HIGH BLOOD PRESSURE
-            //   "label" : [
-            //     "00:00", "01:00", "02:00", "03:00", "04:00"
-            //   ],
-            //   "value" : [
-            //     100, 70, 90, 70, 85
-            //   ]
-            // }, 
-            // { // LOW BLOOD PRESSURE
-            //   "label" : [
-            //     "00:00", "01:00", "02:00", "03:00", "04:00"
-            //   ],
-            //   "value" : [
-            //     70, 85, 60, 75, 60
-            //   ]
-            // },
-            // { // HEART RATE
-            //   "label" : [
-            //     "05:00", "06:00", "09:00", "10:00", "11:00"
-            //   ],
-            //   "value" : [
-            //     90, 100, 80, 95, 70
-            //   ]
-            // }
-          ],
+          allData:[{}],
           activeIndex: 0,
           chartData: null,
           extraOptions: chartConfigs.purpleChartOptions,
