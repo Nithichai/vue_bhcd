@@ -8,9 +8,5 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src')
     }
-  },
-  devServer: {
-    compress: true,
-    public: 'basic-health-care-device.herokuapp.com'
   }
 };
