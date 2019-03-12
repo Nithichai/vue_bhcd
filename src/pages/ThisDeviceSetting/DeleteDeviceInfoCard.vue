@@ -63,7 +63,7 @@
         this.deleting = true
         axios({
           method: 'post',
-          url: 'http://127.0.0.1:8000/device-info/delete/id',
+          url: 'https://bhcd-api.herokuapp.com/device-info/delete/id',
           headers: {
             'Content-Type' : 'application/json'
           },
@@ -79,7 +79,7 @@
             this.confirmModalVisible = false
             this.notifyVue('top', 'right')
             setTimeout(function() {
-              window.location.replace("http://localhost:8080/#/device-setting/")
+              window.location.replace("https://basic-health-care-device.herokuapp.com/#/device-setting/")
             }, 3000);
           }
         })

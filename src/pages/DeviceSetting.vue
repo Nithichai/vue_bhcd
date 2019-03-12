@@ -102,7 +102,7 @@
       const axios = require('axios');
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:8000/user-line-device-info/list/id',
+        url: 'https://bhcd-api.herokuapp.com/user-line-device-info/list/id',
         headers: {
           'Content-Type' : 'application/json'
         },
@@ -121,7 +121,7 @@
         this.inserting = true
         axios({
           method: 'post',
-          url: 'http://127.0.0.1:8000/device-info/new/onlyid',
+          url: 'https://bhcd-api.herokuapp.com/device-info/new/onlyid',
           headers: {
             'Content-Type' : 'application/json'
           },
@@ -134,7 +134,7 @@
         }).then((response) => {
           axios({
             method: 'post',
-            url: 'http://127.0.0.1:8000/user-line/new',
+            url: 'https://bhcd-api.herokuapp.com/user-line/new',
             headers: {
               'Content-Type' : 'application/json'
             },

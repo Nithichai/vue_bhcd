@@ -62,7 +62,7 @@
         this.deleting = true
         axios({
           method: 'post',
-          url: 'http://127.0.0.1:8000/user-line/delete/id',
+          url: 'https://bhcd-api.herokuapp.com/user-line/delete/id',
           headers: {
             'Content-Type' : 'application/json'
           },
@@ -74,7 +74,7 @@
         }).then((response) => {
           axios({
             method: 'post',
-            url: 'http://127.0.0.1:8000/user-info/delete/id',
+            url: 'https://bhcd-api.herokuapp.com/user-info/delete/id',
             headers: {
               'Content-Type' : 'application/json'
             },

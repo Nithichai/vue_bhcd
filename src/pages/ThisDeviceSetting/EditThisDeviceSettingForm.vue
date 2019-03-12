@@ -112,7 +112,7 @@
         this.updating = true
         axios({
           method: 'post',
-          url: 'http://127.0.0.1:8000/device-info/update/id',
+          url: 'https://bhcd-api.herokuapp.com/device-info/update/id',
           headers: {
             'Content-Type' : 'application/json'
           },

@@ -78,7 +78,7 @@
         this.updating = true
         axios({
           method: 'post',
-          url: 'http://127.0.0.1:8000/user-info/update/id',
+          url: 'https://bhcd-api.herokuapp.com/user-info/update/id',
           headers: {
             'Content-Type' : 'application/json'
           },

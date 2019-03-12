@@ -10,7 +10,7 @@ const routes = [
   {
     path: "/",
     component: DashboardLayout,
-    // redirect: "/",
+    // redirect: "/health-info",
     children: [
       {
         path: "personal-info",

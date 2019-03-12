@@ -106,7 +106,7 @@
         const axios = require('axios');
         axios({
           method: 'post',
-          url: 'http://127.0.0.1:8000/health-info/check/id-esp',
+          url: 'https://bhcd-api.herokuapp.com/health-info/check/id-esp',
           headers: {
             'Content-Type' : 'application/json'
           },
