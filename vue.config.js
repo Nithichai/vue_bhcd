@@ -33,5 +33,10 @@ module.exports = {
   css: {
     // Enable CSS source maps.
     sourceMap: process.env.NODE_ENV !== 'production'
-  }
+  },
+  devServer: {
+    host: '0.0.0.0',
+    hot: true,
+    disableHostCheck: true,
+  },
 };
