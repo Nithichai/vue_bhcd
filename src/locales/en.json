@@ -122,6 +122,7 @@
     "typography": "Typography",
     "rtlSupport": "RTL Support",
     "personal-info": "ข้อมูลผู้ใช้งาน",
-    "device-setting": "จัดการข้อมูลผู้ใช้งาน"
+    "device-setting": "จัดการข้อมูลผู้ใช้งาน",
+    "health-info": "ข้อมูลสุขภาพ"
   }
 }

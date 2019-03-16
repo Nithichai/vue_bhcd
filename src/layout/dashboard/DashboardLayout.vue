@@ -4,7 +4,7 @@
       <template slot="links">
         <sidebar-link to="/personal-info" :name="$t('sidebar.personal-info')" icon="tim-icons icon-single-02"/>
         <sidebar-link to="/device-setting" :name="$t('sidebar.device-setting')" icon="tim-icons icon-settings-gear-63"/>
-        <!-- <sidebar-link to="/notifications" :name="$t('sidebar.notifications')" icon="tim-icons icon-bell-55"/> -->
+        <sidebar-link to="/health-info" :name="$t('sidebar.health-info')" icon="tim-icons icon-bell-55"/>
         <!-- <sidebar-link to="/profile" :name="$t('sidebar.userProfile')" icon="tim-icons icon-single-02"/> -->
         <!-- <sidebar-link to="/table-list" :name="$t('sidebar.tableList')" icon="tim-icons icon-puzzle-10"/> -->
         <!-- <sidebar-link to="/typography" :name="$t('sidebar.typography')" icon="tim-icons icon-align-center"/> -->

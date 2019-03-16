@@ -38,6 +38,11 @@
                         :extra-options="bigLineChart.extraOptions">
             </line-chart>
           </div>
+          <div class="row">
+            <div class="col-md-12 pl-md-3 pr-md-1">
+              <a href="/#/health-info" class="btn">ย้อนกลับ</a>
+            </div>
+          </div>
         </card>
       </div>
     </div>
@@ -112,7 +117,7 @@
           },
           data: {
               "data" : {
-                "esp" : this.$route.params.id,
+                "esp" : this.$route.params.esp,
               }
           }
         }).then((response) => {
@@ -123,17 +128,22 @@
           var hr = []
           data.forEach(function(element) {
             var date = new Date(element['created_at'])
-            var hour = date.getHours()
-            var minute = date.getMinutes()
-            var second = date.getSeconds()
-            var formatDateTime = ((hour >= 10) ? hour.toString() : "0" + hour.toString())
-              + ":" + ((minute >= 10) ? minute.toString() : "0" + minute.toString())
-              + ":" + ((second >= 10) ? second.toString() : "0" + second.toString()) 
-            console.log(formatDateTime)
-            label.push(formatDateTime)
-            hbp.push(element['hbp'])
-            lbp.push(element['lbp'])
-            hr.push(element['hr'])
+            date.setTime( date.getTime() - date.getTimezoneOffset()*60*1000 )
+            var nowDate = new Date(Date.now())
+            var ytdDate = new Date(nowDate.getTime() - 24*60*60*1000)
+            if (ytdDate < date) {
+              var thisDate = date.getDate();
+              var hour = date.getHours()
+              var minute = date.getMinutes()
+              var second = date.getSeconds()
+              var formatDateTime = ((hour >= 10) ? hour.toString() : "0" + hour.toString())
+                + ":" + ((minute >= 10) ? minute.toString() : "0" + minute.toString())
+                + ":" + ((second >= 10) ? second.toString() : "0" + second.toString())
+              label.push(formatDateTime)
+              hbp.push(element['hbp'])
+              lbp.push(element['lbp'])
+              hr.push(element['hr'])
+            }
           })
           label = label.reverse()
           hbp = hbp.reverse()

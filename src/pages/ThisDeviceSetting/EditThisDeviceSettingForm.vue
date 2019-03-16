@@ -79,12 +79,12 @@
         <a href="/#/device-setting" slot="footer" class="btn">ย้อนกลับ</a>
       </div>
     </div>
-    <!-- <div class="row">
+    <div class="row">
       <div class="col-md-12 pl-md-3 pr-md-1 pt-3">
         <p v-if="updateStatus==400" class="text-danger">การยืนยันไม่สำเร็จ</p>
         <p v-if="updateStatus==200" class="text-success">การยืนยันสำเร็จ</p>
       </div>
-    </div> -->
+    </div>
   </card>
 </template>
 <script>
