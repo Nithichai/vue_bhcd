@@ -1,6 +1,6 @@
 <template>
-    <div v-show="!this.loading">
-      <div class="row">
+    <div>
+      <div class="row" v-show="!this.loading">
         <div class="col-12">
           <card class="card-plain">
             <div class="table-full-width table-responsive">
