@@ -112,7 +112,7 @@
           },
           data: {
               "data" : {
-                "esp" : "00A"
+                "esp" : this.$route.params.id
               }
           }
         }).then((response) => {

@@ -5,12 +5,13 @@ const PersonalInfo = () => import("@/pages/PersonalInfo.vue");
 const DeviceSetting = () => import("@/pages/DeviceSetting.vue");
 const ThisDeviceSetting = () => import("@/pages/ThisDeviceSetting.vue");
 const HealthInfo = () => import("@/pages/HealthInfo.vue");
+const HealthInfoList = () => import("@/pages/HealthInfoList.vue");
 
 const routes = [
   {
     path: "/",
     component: DashboardLayout,
-    // redirect: "/health-info",
+    redirect: "/personal-info",
     children: [
       {
         path: "personal-info",
@@ -18,9 +19,14 @@ const routes = [
         component: PersonalInfo
       },
       {
-        path: "health-info",
-        name: "health-info",
+        path: "this-health-info/:esp",
+        name: "ข้อมูลสุขภาพ",
         component: HealthInfo
+      },
+      {
+        path: "health-info",
+        name: "ตารางผู้ใช้งาน(ข้อมูลสุขภาพ)",
+        component: HealthInfoList
       },
       {
         path: "device-setting",
