@@ -106,13 +106,12 @@
         const axios = require('axios');
         axios({
           method: 'post',
-          url: 'https://bhcd-api.herokuapp.com/health-info/check/id-esp',
+          url: 'https://bhcd-api.herokuapp.com/health-info/check/esp',
           headers: {
             'Content-Type' : 'application/json'
           },
           data: {
               "data" : {
-                "id" : "001",
                 "esp" : "00A"
               }
           }
@@ -123,7 +122,15 @@
           var lbp = []
           var hr = []
           data.forEach(function(element) {
-            label.push(element['created_at'])
+            var date = new Date(element['created_at'])
+            var hour = date.getHours()
+            var minute = date.getMinutes()
+            var second = date.getSeconds()
+            var formatDateTime = ((hour >= 10) ? hour.toString() : "0" + hour.toString())
+              + ":" + ((minute >= 10) ? minute.toString() : "0" + minute.toString())
+              + ":" + ((second >= 10) ? second.toString() : "0" + second.toString()) 
+            console.log(formatDateTime)
+            label.push(formatDateTime)
             hbp.push(element['hbp'])
             lbp.push(element['lbp'])
             hr.push(element['hr'])
