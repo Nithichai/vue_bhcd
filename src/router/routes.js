@@ -16,7 +16,7 @@ const routes = [
       {
         path: "personal-info",
         name: "ข้อมูลผู้ใช้งาน",
-        component: PersonalInfo
+        component: PersonalInfo,
       },
       {
         path: "this-health-info/:esp",
