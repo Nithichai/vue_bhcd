@@ -43,21 +43,6 @@ export default {
         this.$sidebar.displaySidebar(false);
       }
     }
-  },
-  mounted() {
-    axios({
-        method: 'get',
-        url: 'https://bhcd-line-login.herokuapp.com',
-      }).then((response) => {
-        if (response.status == 200) {
-          window.location.replace("https://basic-health-care-device.herokuapp.com/#")
-        }
-      }).catch((error) => {
-        console.log(error.response.status)
-        if (error.response.status == 404) {
-          window.location.replace("https://bhcd-line-login.herokuapp.com/login/line")
-        }
-      })
   }
 };
 </script>
