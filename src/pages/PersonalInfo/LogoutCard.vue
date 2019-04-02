@@ -18,7 +18,7 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <base-button type="danger" @click="deleteDevice" :loading=deleting>ลบ</base-button>
+            <base-button type="danger" @click="deleteDevice(model.id)" :loading=deleting>ลบ</base-button>
           </div>
         </div>
         <div class="row">
@@ -58,7 +58,7 @@
       }
     },
     methods: {
-      deleteDevice:function() {
+      deleteDevice:function(id) {
         this.deleting = true
         axios({
           method: 'post',
@@ -68,7 +68,7 @@
           },
           data: {
             "data" : {
-              "id" : "Ud20b48e6c0ff39f924fef4d5ffd9ce4a",
+              "id" : id,
             }
           }
         }).then((response) => {
@@ -80,20 +80,47 @@
             },
             data: {
               "data" : {
-                "id" : "Ud20b48e6c0ff39f924fef4d5ffd9ce4a",
+                "id" : id,
               }
             }
           }).then((response) => {
             this.deleteStatus = response.status
             this.deleting = false
+            localStorage.clear()
           }).catch((error) => {
             this.deleteStatus = error.response.status
             this.deleting = false
           })
         }).catch((error) => {
-          this.deleteStatus = error.response.status
-          this.deleting = false
-          return
+          console.log(error.response.status == 404)
+          if (error.response.status == 404) {
+            axios({
+              method: 'post',
+              url: 'https://bhcd-api.herokuapp.com/user-info/delete/id',
+              headers: {
+                'Content-Type' : 'application/json'
+              },
+              data: {
+                "data" : {
+                  "id" : id,
+                }
+              }
+            }).then((response) => {
+              this.deleteStatus = response.status
+              this.deleting = false
+              localStorage.clear()
+              this.notifyVue('top', 'right')
+              setTimeout(function() {
+                location.reload()
+              }, 3000);
+            }).catch((error) => {
+              this.deleteStatus = error.response.status
+              this.deleting = false
+            })
+          } else {
+            this.deleteStatus = error.response.status
+            this.deleting = false
+          }
         })
       },
       notifyVue(verticalAlign, horizontalAlign) {

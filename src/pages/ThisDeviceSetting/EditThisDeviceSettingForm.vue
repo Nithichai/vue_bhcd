@@ -76,7 +76,7 @@
     <div class="row">
       <div class="col-md-12 pl-md-3 pr-md-1">
         <base-button slot="footer" type="success" fill @click="updateData()" :loading=updating>ยืนยัน</base-button>
-        <a href="/#/device-setting" slot="footer" class="btn">ย้อนกลับ</a>
+        <a href="/device-setting" slot="footer" class="btn">ย้อนกลับ</a>
       </div>
     </div>
     <div class="row">
@@ -93,6 +93,9 @@
   import NotificationTemplateNot from '../Notifications/UpdateDeviceNotCompleteNoti';
 
   const axios = require('axios');
+  const jwt = require('jsonwebtoken');
+
+  var userInfo = jwt.decode(idToken)
 
   export default {
     components: {

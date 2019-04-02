@@ -15,7 +15,7 @@
                 <tr v-for="(item, index) in data" :key="index">
                   <td v-for="(column, index) in columns" :key="index">
                     <div v-if="column=='แก้ไข'">
-                      <a :href="'/#/this-device-setting/'+ item[column] + '/'" class="btn">แก้ไข</a>
+                      <a :href="'/this-device-setting/'+ item[column]" class="btn">แก้ไข</a>
                     </div>
                     <div v-else>
                       {{item[column]}}
@@ -95,11 +95,17 @@
         password: '',
         inserting: false,
         insertStatus: -1,
-        loading: true
+        loading: true,
+        userInfo: ''
       };
     },
     mounted() {
       const axios = require('axios');
+      const jwt = require('jsonwebtoken');
+      
+      var idToken = localStorage.id_token
+      this.userInfo = jwt.decode(idToken)
+
       axios({
         method: 'post',
         url: 'https://bhcd-api.herokuapp.com/user-line-device-info/list/id',
@@ -108,7 +114,7 @@
         },
         data: {
             "data" : {
-              "id" : "Ud20b48e6c0ff39f924fef4d5ffd9ce4a"
+              "id" : this.userInfo.sub
             }
           }
       }).then((response) => {
@@ -140,7 +146,7 @@
             },
             data: {
               "data" : {
-                "id" : "Ud20b48e6c0ff39f924fef4d5ffd9ce4a",
+                "id" : this.userInfo.sub,
                 "esp" : this.deviceid
               }
             }

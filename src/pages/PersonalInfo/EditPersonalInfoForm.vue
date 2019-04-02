@@ -48,7 +48,7 @@
     </div>
     <div class="row">
       <div class="col-md-12 pl-md-3 pr-md-1">
-        <base-button slot="footer" type="success" fill @click="updateData()" :loading=updating>ยืนยัน</base-button>
+        <base-button slot="footer" type="success" fill @click="updateData()" :loading="updating">ยืนยัน</base-button>
       </div>
     </div>
   </card>
@@ -91,6 +91,8 @@
               "email" : this.model.email,
               "career" : this.model.career,
               "birthday" : this.model.birthday,
+              "displayName" : this.model.displayName,
+              "pic" : this.model.pic,
             }
           }
         }).then((response) => {

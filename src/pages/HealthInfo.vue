@@ -40,7 +40,7 @@
           </div>
           <div class="row">
             <div class="col-md-12 pl-md-3 pr-md-1">
-              <a href="/#/health-info" class="btn">ย้อนกลับ</a>
+              <a href="/health-info" class="btn">ย้อนกลับ</a>
             </div>
           </div>
         </card>

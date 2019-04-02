@@ -6,6 +6,7 @@ const DeviceSetting = () => import("@/pages/DeviceSetting.vue");
 const ThisDeviceSetting = () => import("@/pages/ThisDeviceSetting.vue");
 const HealthInfo = () => import("@/pages/HealthInfo.vue");
 const HealthInfoList = () => import("@/pages/HealthInfoList.vue");
+const LoginReturn = () => import("@/pages/LoginReturn.vue");
 
 const routes = [
   {
@@ -39,6 +40,10 @@ const routes = [
         component: ThisDeviceSetting
       }
     ]
+  },
+  { 
+    path: "/login/return", 
+    component: LoginReturn 
   },
   { 
     path: "*", 

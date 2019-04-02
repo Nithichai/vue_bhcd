@@ -15,7 +15,7 @@
                 <tr v-for="(item, index) in data" :key="index">
                   <td v-for="(column, index) in columns" :key="index">
                     <div v-if="column=='แก้ไข'">
-                      <a :href="'/#/this-health-info/'+ item[column] + '/'" class="btn">ดูข้อมูลสุขภาพ</a>
+                      <a :href="'this-health-info/'+ item[column]" class="btn">ดูข้อมูลสุขภาพ</a>
                     </div>
                     <div v-else>
                       {{item[column]}}
@@ -33,6 +33,10 @@
 <script>
 
   const axios = require('axios');
+  const jwt = require('jsonwebtoken');
+      
+  var idToken = localStorage.id_token
+  var userInfo = jwt.decode(idToken)
 
   const tableColumns = ["หมายเลข", "ผู้ใช้งาน", "แก้ไข"];
   const tableData = [];
@@ -56,7 +60,7 @@
         },
         data: {
             "data" : {
-              "id" : "Ud20b48e6c0ff39f924fef4d5ffd9ce4a"
+              "id" : userInfo.sub
             }
           }
       }).then((response) => {

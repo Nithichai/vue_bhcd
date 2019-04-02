@@ -79,9 +79,11 @@
             this.confirmModalVisible = false
             this.notifyVue('top', 'right')
             setTimeout(function() {
-              window.location.replace("https://basic-health-care-device.herokuapp.com/#/device-setting/")
+              window.location.replace("https://basic-health-care-device.herokuapp.com/device-setting")
             }, 3000);
           }
+        }).catch((error) => {
+          console.log(error.response)
         })
       },
       notifyVue(verticalAlign, horizontalAlign) {

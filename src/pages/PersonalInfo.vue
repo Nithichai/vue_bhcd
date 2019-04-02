@@ -13,6 +13,7 @@
   import LogoutCard from './PersonalInfo/LogoutCard';
   
   const axios = require('axios');
+  const jwt = require('jsonwebtoken');
 
   export default {
     components: {
@@ -20,6 +21,8 @@
       LogoutCard
     },
     mounted() {
+      var idToken = localStorage.id_token
+      var userInfo = jwt.decode(idToken)
       axios({
         method: 'post',
         url: 'https://bhcd-api.herokuapp.com/user-info/check/id',
@@ -28,11 +31,13 @@
         },
         data: {
           "data" : {
-            "id" : "Ud20b48e6c0ff39f924fef4d5ffd9ce4a"
+            "id" : userInfo.sub
           }
         }
       }).then((response) => {
         this.model = response.data.data
+        this.model.displayName = localStorage.name
+        this.model.pic = localStorage.picture
       })
     },
     data() {
