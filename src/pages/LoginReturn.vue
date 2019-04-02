@@ -25,8 +25,8 @@
               grant_type: 'authorization_code',
               code: code,
               redirect_uri: 'https://basic-health-care-device.herokuapp.com/login/return',
-              client_id: process.env.CLIENT_ID,
-              client_secret: process.env.CLIENT_SECRET
+              client_id: '1556734128',
+              client_secret: '50d285edc9f1385bef799d2f04879c35'
             })
         }).then((response) => {
           for(var key in response.data) {
