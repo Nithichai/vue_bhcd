@@ -30,7 +30,7 @@ router.beforeEach((to, from, next) => {
       next()
     }).catch((error) => {
       localStorage.clear();
-      window.location.replace("https://access.line.me/oauth2/v2.1/authorize?bot_prompt=normal&response_type=code&redirect_uri=https%3A%2F%2Fbasic-health-care-device.herokuapp.com%2Flogin%2Freturn&scope=profile%20openid%20email&state=KGn1K1mqzr&client_id=" + env.process.CLIENT_ID)
+      window.location.replace("https://access.line.me/oauth2/v2.1/authorize?bot_prompt=normal&response_type=code&redirect_uri=https%3A%2F%2Fbasic-health-care-device.herokuapp.com%2Flogin%2Freturn&scope=profile%20openid%20email&state=KGn1K1mqzr&client_id=" + process.env.CLIENT_ID)
     })
   } else {
     next()
