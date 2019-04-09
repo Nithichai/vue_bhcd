@@ -36,8 +36,6 @@
         }
       }).then((response) => {
         this.model = response.data.data
-        this.model.displayName = localStorage.name
-        this.model.pic = localStorage.picture
       })
     },
     data() {

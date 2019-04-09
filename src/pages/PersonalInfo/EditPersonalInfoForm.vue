@@ -2,6 +2,16 @@
   <card v-show="Object.keys(model).length > 0">
     <h5 slot="header" class="title">กรอกประวัติผู้ดูแล</h5>
     <div class="row">
+      <div class="col-md-12 pr-md-1">
+        <fieldset disabled>
+          <base-input label="ชื่อไลน์"
+                    placeholder="่ชื่อไลน์"
+                    v-model="model.displayName">
+          </base-input>
+        </fieldset>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-6 pr-md-1">
         <base-input label="ชื่อ"
                   placeholder="ชื่อ"
