@@ -93,9 +93,6 @@
   import NotificationTemplateNot from '../Notifications/UpdateDeviceNotCompleteNoti';
 
   const axios = require('axios');
-  const jwt = require('jsonwebtoken');
-
-  var userInfo = jwt.decode(idToken)
 
   export default {
     components: {
