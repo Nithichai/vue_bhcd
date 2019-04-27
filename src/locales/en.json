@@ -2,14 +2,15 @@
   "dashboard": {
     "completedTasks": "Completed Tasks",
     "dailySales": "Daily Sales",
-    "performance": "ข้อมูลทางด้านสุขภาพ",
+    "performance": "ความดันโลหิต/อัตรการเต้นหัวใจ",
     "simpleTable": "Simple Table",
     "totalShipments": "สรุปผลข้อมูลทางด้านสุขภาพ",
     "chartCategories": [
-      "High Blood Pressure",
-      "Low Blood Pressure",
+      "High",
+      "Low",
       "Heart Rate"
     ],
+    "performanceOxi": "ปริมาณออกซิเจนในเลือด",
     "tasks": "Tasks({count})",
     "today": "Today",
     "dropdown": {

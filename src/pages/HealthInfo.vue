@@ -38,6 +38,36 @@
                         :extra-options="bigLineChart.extraOptions">
             </line-chart>
           </div>
+        </card>
+
+
+        <card type="chart">
+          <template slot="header">
+            <div class="row">
+              <div class="col-sm-6" :class="isRTL ? 'text-right' : ''">
+                <h5 class="card-category">{{$t('dashboard.totalShipments')}}</h5>
+                <h2 class="card-title">{{$t('dashboard.performanceOxi')}}</h2>
+              </div>
+              <div class="col-sm-6">
+                <div class="btn-group btn-group-toggle"
+                     :class="isRTL ? 'float-left' : 'float-right'"
+                     data-toggle="buttons">
+                </div>
+              </div>
+            </div>
+          </template>
+          <div class="chart-area">
+            <line-chart style="height: 100%"
+                        ref="bigChart"
+                        chart-id="big-line-chart"
+                        :chart-data="oxiLineChart.chartData"
+                        :gradient-colors="oxiLineChart.gradientColors"
+                        :gradient-stops="oxiLineChart.gradientStops"
+                        :extra-options="oxiLineChart.extraOptions">
+            </line-chart>
+          </div>  
+        </card>
+        <card>
           <div class="row">
             <div class="col-md-12 pl-md-3 pr-md-1">
               <a href="/health-info" class="btn">ย้อนกลับ</a>
@@ -62,6 +92,15 @@
     data() {
       return {
         bigLineChart: {
+          allData:[{}],
+          activeIndex: 0,
+          chartData: null,
+          extraOptions: chartConfigs.purpleChartOptions,
+          gradientColors: config.colors.primaryGradient,
+          gradientStops: [1, 0.4, 0],
+          categories: []
+        },
+        oxiLineChart: {
           allData:[{}],
           activeIndex: 0,
           chartData: null,
@@ -167,6 +206,76 @@
         }).catch((error) => {
           console.log(error.response)
         })
+      },
+      initOxiChart(index) {
+        let chartData = {
+          datasets: [{
+            fill: true,
+            borderColor: config.colors.primary,
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            pointBackgroundColor: config.colors.primary,
+            pointBorderColor: 'rgba(255,255,255,0)',
+            pointHoverBackgroundColor: config.colors.primary,
+            pointBorderWidth: 20,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 15,
+            pointRadius: 4,
+            data: this.oxiLineChart.allData[index].value
+          }],
+          labels: this.oxiLineChart.allData[index].label,
+        }
+        this.$refs.bigChart.updateGradients(chartData);
+        this.oxiLineChart.chartData = chartData;
+        this.oxiLineChart.activeIndex = index;
+      },
+      getDataOxi(index) {
+        const axios = require('axios');
+        axios({
+          method: 'post',
+          url: 'https://bhcd-api.herokuapp.com/health-info-oxi/check/esp',
+          headers: {
+            'Content-Type' : 'application/json'
+          },
+          data: {
+              "data" : {
+                "esp" : this.$route.params.esp,
+              }
+          }
+        }).then((response) => {
+          var data = response.data.data
+          var label = []
+          var spo2 = []
+          data.forEach(function(element) {
+            var date = new Date(element['created_at'])
+            date.setTime( date.getTime() - date.getTimezoneOffset()*60*1000 )
+            var nowDate = new Date(Date.now())
+            var ytdDate = new Date(nowDate.getTime() - 24*60*60*1000)
+            if (ytdDate < date) {
+              var thisDate = date.getDate();
+              var hour = date.getHours()
+              var minute = date.getMinutes()
+              var second = date.getSeconds()
+              var formatDateTime = ((hour >= 10) ? hour.toString() : "0" + hour.toString())
+                + ":" + ((minute >= 10) ? minute.toString() : "0" + minute.toString())
+                + ":" + ((second >= 10) ? second.toString() : "0" + second.toString())
+              label.push(formatDateTime)
+              spo2.push(element['spo2'])
+            }
+          })
+          label = label.reverse()
+          spo2 = spo2.reverse()
+          this.oxiLineChart.allData = [
+            {
+              "label" : label,
+              "value" : spo2
+            }
+          ]
+          this.initOxiChart(index)
+        }).catch((error) => {
+          console.log(error.response)
+        })
       }
     },
     mounted() {
@@ -176,6 +285,7 @@
         this.$rtl.enableRTL();
       }
       this.getData(0)
+      this.getDataOxi(0)
     },
     beforeDestroy() {
       if (this.$rtl.isRTL) {
