@@ -16,22 +16,22 @@ const routes = [
     children: [
       {
         path: "personal-info",
-        name: "ข้อมูลผู้ใช้งาน",
+        name: "ข้อมูลผู้ดูแล",
         component: PersonalInfo,
       },
       {
         path: "this-health-info/:esp",
-        name: "ข้อมูลสุขภาพ",
+        name: "ข้อมูลสุขภาพผู้สูงอายุ",
         component: HealthInfo
       },
       {
         path: "health-info",
-        name: "ตารางผู้ใช้งาน(ข้อมูลสุขภาพ)",
+        name: "ตารางผู้สูงอายุ(ข้อมูลสุขภาพ)",
         component: HealthInfoList
       },
       {
         path: "device-setting",
-        name: "จัดการข้อมูลผู้ใช้งาน",
+        name: "จัดการข้อมูลผู้สูงอายุ",
         component: DeviceSetting
       },
       {
